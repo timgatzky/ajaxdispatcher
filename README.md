@@ -10,7 +10,7 @@ Contao extension for ajax handling in contao frontend or backend.
 Usage
 -----
 
-´´´
+´
 window.addEvent('domready', function()
 {
 	// just perform a simple call. use method:'get' to send as GET (default is POST)
@@ -25,6 +25,6 @@ window.addEvent('getResponse', function(txt)
 {
 	console.log(txt);
 });
-´´´
+´
 
 see the examples.js for more examples
