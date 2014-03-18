@@ -15,12 +15,12 @@ window.addEvent('domready', function()
 });
 
 // event listener: send the response to the console
-window.addEvent('getResponseText', function(txt)
+window.addEvent('getResponse', function(txt)
 {
 	console.log(txt);
 });
 
-window.addEvent('getResponse', function(obj)
+window.addEvent('getResponseObject', function(obj)
 {
 	console.log(obj);
 });

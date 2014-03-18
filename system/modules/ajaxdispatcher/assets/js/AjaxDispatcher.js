@@ -84,8 +84,8 @@ var AjaxDispatcher = new Class(
 				obj.instance = this;
 				
 				// fire events
-				window.fireEvent('getResponseText',response);
-				window.fireEvent('getResponse',obj);
+				window.fireEvent('getResponse',response);
+				window.fireEvent('getResponseObject',obj);
 			}
 		}).send();
 	},

@@ -21,7 +21,7 @@ window.addEvent('domready', function()
 });
 
 // event listener: send the response to the console
-window.addEvent('getResponseText', function(txt)
+window.addEvent('getResponse', function(txt)
 {
 	console.log(txt);
 });
