@@ -11,7 +11,7 @@
 var AjaxDispatcher = new Class(
 {
 	/**
-	 * Imports
+	 * Inheritance
 	 */
 	Implements: [Options, Events],
 	
@@ -49,6 +49,7 @@ var AjaxDispatcher = new Class(
 	
 	/**
 	 * Initialize Class and apply options
+	 * @param object
 	 */
 	initialize: function(objOptions)
 	{
@@ -77,9 +78,9 @@ var AjaxDispatcher = new Class(
 		this.setOptions(objOptions);
     },
     
-     /**
+    /**
 	 * Send a request
-	 * @string
+	 * @param object
 	 */
 	send: function(objData)
 	{
