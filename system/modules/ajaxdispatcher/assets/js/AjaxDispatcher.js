@@ -29,6 +29,8 @@ var AjaxDispatcher = new Class(
 	
 	/**
 	 * Request method
+	 * Since contao processes the javascript via $GLOBALS['TL_HEAD'] we can use the inserttag here to get a fresh request token
+	 * and write it as default for any instances of this class
 	 * @var string
 	 */
 	strMethod: 'post',
@@ -37,7 +39,7 @@ var AjaxDispatcher = new Class(
 	 * Request token
 	 * @var string
 	 */
-	strRequestToken: '',
+	strRequestToken: "{{request_token}}",
 	
 	/**
 	 * Instance name
@@ -58,8 +60,14 @@ var AjaxDispatcher = new Class(
 		// set instance name when given
 		this.strName = objOptions.name;
 		
-		// since contao processes the javascript via $GLOBALS['TL_HEAD'] we can use the inserttag here to get a fresh request token
-		this.strRequestToken = "{{request_token}}";
+		if(objOptions.request_token)
+		{
+			this.strRequestToken = objOptions.request_token;
+		}
+		else if(objOptions.REQUEST_TOKEN)
+		{
+			this.strRequestToken = objOptions.REQUEST_TOKEN;
+		}
 		
 		if(objOptions.method)
 		{
@@ -91,7 +99,6 @@ var AjaxDispatcher = new Class(
 		
 		// add the request token
 		objData.REQUEST_TOKEN = this.strRequestToken;
-		
 		// send ajax request to dispatcher
 		var request = new Request(
 		{
