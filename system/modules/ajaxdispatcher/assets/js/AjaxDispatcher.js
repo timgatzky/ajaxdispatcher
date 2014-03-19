@@ -5,7 +5,6 @@
  * @copyright 	Tim Gatzky 2014
  * @author  	Tim Gatzky <info@tim-gatzky.de>
  * @package  	ajaxdispatcher
- * @link  		http://contao.org
  * @license  	http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
  
@@ -35,6 +34,12 @@ var AjaxDispatcher = new Class(
 	strMethod: 'post',
 	
 	/**
+	 * Request token
+	 * @var string
+	 */
+	strRequestToken: '',
+	
+	/**
 	 * Instance name
 	 * @var string
 	 */
@@ -52,6 +57,9 @@ var AjaxDispatcher = new Class(
 		
 		// set instance name when given
 		this.strName = objOptions.name;
+		
+		// since contao processes the javascript via $GLOBALS['TL_HEAD'] we can use the inserttag here to get a fresh request token
+		this.strRequestToken = "{{request_token}}";
 		
 		if(objOptions.method)
 		{
@@ -80,6 +88,9 @@ var AjaxDispatcher = new Class(
 		{
 			method = objData.method;
 		}
+		
+		// add the request token
+		objData.REQUEST_TOKEN = this.strRequestToken;
 		
 		// send ajax request to dispatcher
 		var request = new Request(
