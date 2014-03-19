@@ -11,19 +11,27 @@ Usage
 -----
 
 ```
+/**
+ * Examples of working with the AjaxDispatcher class
+ */
 window.addEvent('domready', function()
 {
-	// just perform a simple call. use method:'get' to send as GET (default is POST)
-	var myAjax = new AjaxDispatcher().send({hello:'world'});
-
-	// replace an inserttag
-	var myAjaxInsertTag = new AjaxDispatcher().replaceInsertTags('insert_article::3');
+	// OOP approach
+	var myAjax = new AjaxDispatcher();
+	myAjax.replaceInsertTags('insert_article::3');
+	myAjax.addEvent('complete', function(event)
+	{
+		var txt = event.response;
+	});
+	
+	// triggers the onAjaxResponse directely
+	new AjaxDispatcher().replaceInsertTags('insert_article::3');
 });
 
-// event listener: send the response to the console
-window.addEvent('getResponse', function(txt)
+// DOM listener
+window.addEvent('onAjaxResponse', function(event)
 {
-	console.log(txt);
+	var txt = event.response;
 });
 ```
 
