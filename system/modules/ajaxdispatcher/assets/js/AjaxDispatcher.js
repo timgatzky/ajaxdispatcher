@@ -37,7 +37,7 @@ var AjaxDispatcher = new Class(
 	/**
 	 * Initialize Class and apply options
 	 */
-	initialize: function(objOptions=null)
+	initialize: function(objOptions)
 	{
 		if(!objOptions)
 		{
@@ -52,13 +52,14 @@ var AjaxDispatcher = new Class(
 		this.setOptions(objOptions);
     },
     
-    /**
+     /**
 	 * Send a request
 	 * @string
 	 */
 	send: function(objData)
 	{
 		var method = this.strMethod
+		var instance = this;
 		
 		// allow dynamic method changes
 		if(objData.__method)
@@ -79,17 +80,27 @@ var AjaxDispatcher = new Class(
 			data	: 	objData,
 			onSuccess:function(response)
 			{
-				var obj = {};
-				obj.response = response;
-				obj.instance = this;
-				
-				// fire events
-				window.fireEvent('getResponse',response);
-				window.fireEvent('getResponseObject',obj);
+				var event = {};
+				event.response = response;
+				event.instance = instance;
+				event.status = this.status;
+				event.request = this;
+				// trigger complete callback
+				instance.complete(event);
 			}
 		}).send();
 	},
 	
+	/**
+	 * Complete function
+	 * @param object
+	 */
+	complete:function(event)
+    {
+	   this.fireEvent('complete',event);
+	   window.fireEvent('onAjaxResponse',event);
+    },
+    
 	/**
 	 * Simple post request
 	 * @param object
