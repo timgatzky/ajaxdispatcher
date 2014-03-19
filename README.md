@@ -24,7 +24,7 @@ window.addEvent('domready', function()
 		var txt = event.response;
 	});
 	
-	// triggers the onAjaxResponse directely
+	// triggers the onAjaxResponse Event for the window instance directely
 	new AjaxDispatcher().replaceInsertTags('insert_article::3');
 });
 
