@@ -35,6 +35,12 @@ var AjaxDispatcher = new Class(
 	strMethod: 'post',
 	
 	/**
+	 * Instance name
+	 * @var string
+	 */
+	strName: '',
+	
+	/**
 	 * Initialize Class and apply options
 	 */
 	initialize: function(objOptions)
@@ -43,6 +49,9 @@ var AjaxDispatcher = new Class(
 		{
 			return;
 		}
+		
+		// set instance name when given
+		this.strName = objOptions.name;
 		
 		if(objOptions.method)
 		{
@@ -84,6 +93,7 @@ var AjaxDispatcher = new Class(
 				event.response = response;
 				event.instance = instance;
 				event.status = this.status;
+				event.name = instance.strName;
 				event.request = this;
 				// trigger complete callback
 				instance.complete(event);
